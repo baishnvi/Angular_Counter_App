@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
@@ -6,37 +6,48 @@ import { ProfileComponent } from '../profile/profile';
 
 @Component({
   selector: 'app-root',
-  imports: [Login,Signup,ProfileComponent,RouterOutlet],
+  standalone: true,
+  imports: [Login, Signup, ProfileComponent, RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
 
- handleEvent(event: any) {
-  console.log('Event Type:', event.type);
+  display = true;
+  toggleDiv = true;
 
-  // Popup notification
-  alert(`Event Triggered: ${event.type}`);
-
+  hide() {
+    this.display = false;
   }
 
-  name=""
-  displayName="";
-  email="";
-  getName(event:Event){
-    this.name=(event.target as HTMLInputElement).value
+  show() {
+    this.display = true;
   }
-  showName(){
-    this.displayName=this.name;
+
+  toggle() {
+    this.display = !this.display;
   }
-  setName(){
-    this.name="Baishnvi"
+
+  toggleTwo() {
+    this.toggleDiv = !this.toggleDiv;
   }
-   getEmail(val:string){
-    console.log(val);
-    this.email=val;
-   }
-   setEmail(){
-    this.email="default@test.com"
-   }
+  color=2
+  handleColor(val:number){
+    this.color=val
+  }
+  handleInput(event:Event){
+    console.log(parseInt((event.target as HTMLInputElement).value));
+    this.color=parseInt((event.target as HTMLInputElement).value)
+  }
+
+  users=["ankit","baishnvi","pankaj","kritika"];
+  students=[
+    {name:"ankit", age:20, email:"ankit@etest.com"},
+    {name:"baishnvi", age:22, email:"baishnvi@etest.com"},
+    {name:"pankaj", age:21, email:"pankaj@etest.com"},
+    {name:"kritika", age:19, email:"kritika@etest.com"},
+  ]
+  getName(name:string){
+    alert(name);
+  }
 }

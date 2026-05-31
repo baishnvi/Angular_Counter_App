@@ -1,33 +1,81 @@
-<h1 style="text-align: center;">Event in Angular</h1>
-<button class="btn" name="login" (click)="handleEvent($event)">
-Click Event</button>
-<br><br>
+<h1>Angular If-Else Control Flow</h1>
 
-<div (mouseenter)="handleEvent($event)"
-style="background-color:green; width:100px; height:100px;">
-Mouse Enter</div>
-<br><br>
+<button (click)="hide()">Hide Div</button>
+<button (click)="show()">Show Div</button>
+<button (click)="toggle()">Toggle Div</button>
 
-<div (mouseleave)="handleEvent($event)"
-style="background-color:rgb(218, 132, 20);width:100px;height:100px;">
-Mouse Leave this box</div>
-<br>
-<input type="text"
- (focus)="handleEvent($event)"
- (blur)="handleEvent($event)"
-
- (input)="handleEvent($event)"
- name="user">input
+@if(display){
+  <div style="background: rgb(192, 198, 201); padding: 10px;height:100px;width:100px;"> 
+  </div>
+}
 <hr>
-<h1 style="text-align: center;">Get and Set Input Field Value</h1>
-<h1>User Name is: {{displayName}}</h1>
-<input type="text" value="{{name}}" (input)="getName($event)" placeholder="Enter Name">
-<br><br>
-<button (click)="showName()">Get Name</button>
-<button (click)="setName()">Set Name</button>
+<button (click)="toggleTwo()">
+    {{toggleDiv?'show red div':'show gold div'}}
+</button>
 
-<h1>Email : {{email}}</h1>
-<input type="text" value="{{email}}" placeholder="enter email"
-#emailField>
-<button (click)="getEmail(emailField.value)">Get Email</button>
-<button (click)="setEmail()">Set Email</button>
+@if(toggleDiv){
+  <div style="background: rgb(214, 183, 8); padding: 10px;height:100px;width:100px">
+  </div>
+}
+@else{
+    <div style="background-color:red;width:100px;height:100px;">
+
+    </div>
+}
+<hr>
+<button (click)="toggleTwo()">Toggle two</button>
+@if(toggleDiv){
+    <div style="width:100px;height:100px;background-color:rgb(45, 210, 30);">
+        Box
+    </div>
+}
+@else{
+    <div style="width:100px;height:100px;background-color:rgb(88, 14, 138);">
+        Box
+    </div>
+}
+
+
+<hr>
+<hr>
+<h1>Angular Else-If Control Flow</h1>
+<button (click)="handleColor(1)">Red</button>
+<button (click)="handleColor(2)">Blue</button>
+<button (click)="handleColor(3)">Green</button>
+<button (click)="handleColor(10)">Other</button>
+<input type="text" (input)="handleInput($event)" placeholder="Enter Color Name">
+
+@if(color ==1){
+  <div style="background: red; padding: 10px;width:100px;height:100px;">
+  </div>
+}
+@else if(color==2){
+  <div style="background: blue; padding: 10px;width:100px;height:100px;">
+  </div>
+}
+@else if(color==3){
+  <div style="background: green; padding: 10px;width:100px;height:100px;">
+  </div>
+}
+@else{
+    <div style="background-color:black;width:100px;height:100px;">
+
+    </div>
+}
+
+<hr><hr>
+<h1>For loop in Angular</h1>
+@for(item of users; track item){
+  <h2>{{item}}</h2>
+}
+<hr>
+@for(student of students; track student.name;let id= $index){
+  <h2>
+    <span>{{id+1}}</span>
+    <span>{{student.name}}</span>
+    <span>{{student.age}}</span>
+    <span>{{student.email}}</span>
+    <button (click)="getName(student.name)">Get Name</button>
+  </h2>
+
+}
