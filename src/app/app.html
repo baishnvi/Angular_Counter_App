@@ -1,81 +1,51 @@
-<h1>Angular If-Else Control Flow</h1>
+<h1>Basics Of Signals</h1>
 
-<button (click)="hide()">Hide Div</button>
-<button (click)="show()">Show Div</button>
-<button (click)="toggle()">Toggle Div</button>
-
-@if(display){
-  <div style="background: rgb(192, 198, 201); padding: 10px;height:100px;width:100px;"> 
-  </div>
-}
-<hr>
-<button (click)="toggleTwo()">
-    {{toggleDiv?'show red div':'show gold div'}}
-</button>
-
-@if(toggleDiv){
-  <div style="background: rgb(214, 183, 8); padding: 10px;height:100px;width:100px">
-  </div>
-}
-@else{
-    <div style="background-color:red;width:100px;height:100px;">
-
-    </div>
-}
-<hr>
-<button (click)="toggleTwo()">Toggle two</button>
-@if(toggleDiv){
-    <div style="width:100px;height:100px;background-color:rgb(45, 210, 30);">
-        Box
-    </div>
-}
-@else{
-    <div style="width:100px;height:100px;background-color:rgb(88, 14, 138);">
-        Box
-    </div>
-}
-
+<button (click)="count.set(count()+1)">Increment</button>
+<h1>{{count()}}</h1>
+<button (click)="count.set(count()-1)">Decrement</button>
 
 <hr>
+
+<h1>computed signals</h1>
+<h1>{{z()}}</h1>
+
+<button (click)="showValue()">show value</button>
+<button (click)="updateT()">UpdateT</button>
+
 <hr>
-<h1>Angular Else-If Control Flow</h1>
-<button (click)="handleColor(1)">Red</button>
-<button (click)="handleColor(2)">Blue</button>
-<button (click)="handleColor(3)">Green</button>
-<button (click)="handleColor(10)">Other</button>
-<input type="text" (input)="handleInput($event)" placeholder="Enter Color Name">
 
-@if(color ==1){
-  <div style="background: red; padding: 10px;width:100px;height:100px;">
-  </div>
-}
-@else if(color==2){
-  <div style="background: blue; padding: 10px;width:100px;height:100px;">
-  </div>
-}
-@else if(color==3){
-  <div style="background: green; padding: 10px;width:100px;height:100px;">
-  </div>
-}
-@else{
-    <div style="background-color:black;width:100px;height:100px;">
+<h1>Effect in Angular</h1>
+<h2>{{count()}}</h2>
 
-    </div>
+<button (click)="toggleValue()">Update userName</button>
+
+@if(displayHeading()){
+  <h1 style="background-color: green;">Page Heading</h1>
 }
 
 <hr><hr>
-<h1>For loop in Angular</h1>
-@for(item of users; track item){
-  <h2>{{item}}</h2>
-}
-<hr>
-@for(student of students; track student.name;let id= $index){
-  <h2>
-    <span>{{id+1}}</span>
-    <span>{{student.name}}</span>
-    <span>{{student.age}}</span>
-    <span>{{student.email}}</span>
-    <button (click)="getName(student.name)">Get Name</button>
-  </h2>
 
+<h1>For Loop Contexual Variables</h1>
+@for(user of users; track user;
+ let i = $index;
+ let f = $first;
+ let l = $last;
+){
+  @if(f || l){
+    <h3 style="background-color: rgb(161, 103, 63);">{{i+1}} name {{user}}</h3>
+  }
+  @else{
+    <h3>{{i+1}} name {{user}}</h3>
+  }
+  @if($odd){
+    <h3 style="background-color: #aaa;">user{{i}} and name {{user}}</h3>
+  }
+  @if($even){
+    <h3 style="background-color: rgb(167, 74, 190);">user {{i}} and name {{user}}</h3>
+  }
+  <!--
+@empty(){
+  <h1>No Record Found</h1>
+}-->
 }
+

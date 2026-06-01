@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, effect, computed } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
@@ -13,41 +13,54 @@ import { ProfileComponent } from '../profile/profile';
 })
 export class App {
 
-  display = true;
-  toggleDiv = true;
+  // ---------------- BASIC SIGNALS ----------------
+  count = signal(10);
 
-  hide() {
-    this.display = false;
-  }
-
-  show() {
-    this.display = true;
+  updateValue() {
+    this.count.set(this.count() + 1);
   }
 
-  toggle() {
-    this.display = !this.display;
+  // ---------------- COMPUTED SIGNALS ----------------
+  t = signal(10);
+  y = signal(20);
+
+  z = computed(() => this.t() + this.y());
+
+  showValue() {
+    console.log(this.z());
+    this.t.set(1200);
+    console.log(this.z());
   }
 
-  toggleTwo() {
-    this.toggleDiv = !this.toggleDiv;
-  }
-  color=2
-  handleColor(val:number){
-    this.color=val
-  }
-  handleInput(event:Event){
-    console.log(parseInt((event.target as HTMLInputElement).value));
-    this.color=parseInt((event.target as HTMLInputElement).value)
+  updateT() {
+    this.t.set(200);
   }
 
-  users=["ankit","baishnvi","pankaj","kritika"];
-  students=[
-    {name:"ankit", age:20, email:"ankit@etest.com"},
-    {name:"baishnvi", age:22, email:"baishnvi@etest.com"},
-    {name:"pankaj", age:21, email:"pankaj@etest.com"},
-    {name:"kritika", age:19, email:"kritika@etest.com"},
-  ]
-  getName(name:string){
-    alert(name);
+  // ---------------- EFFECT DEMO ----------------
+  userName = signal('juhi');
+
+  displayHeading = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (this.count() === 2) {
+        this.displayHeading.set(true);
+
+        setTimeout(() => {
+          this.displayHeading.set(false);
+        }, 2000);
+      } else {
+        this.displayHeading.set(false);
+      }
+
+      console.log('Count changed:', this.count());
+    });
   }
+
+  toggleValue() {
+    this.count.set(this.count() + 1);
+  }
+
+ users=['anu','rima','siya','ram','rohan']
+ // users=[]
 }
