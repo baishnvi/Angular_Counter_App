@@ -1,51 +1,12 @@
-<h1>Basics Of Signals</h1>
+<h1>To Do List</h1>
+<input type="text" [(ngModel)]="task" placeholder="Enter New Task">
+<button (click)="addTask()">Add Task</button>
 
-<button (click)="count.set(count()+1)">Increment</button>
-<h1>{{count()}}</h1>
-<button (click)="count.set(count()-1)">Decrement</button>
+@for(task of taskList; track task.id){
+  <ul class="task-list">
+    <li>{{task.id}}</li>
+    <li>{{task.task}}</li>
+    <li><button (click)="deleteTask(task.id)">Delete</button></li>
 
-<hr>
-
-<h1>computed signals</h1>
-<h1>{{z()}}</h1>
-
-<button (click)="showValue()">show value</button>
-<button (click)="updateT()">UpdateT</button>
-
-<hr>
-
-<h1>Effect in Angular</h1>
-<h2>{{count()}}</h2>
-
-<button (click)="toggleValue()">Update userName</button>
-
-@if(displayHeading()){
-  <h1 style="background-color: green;">Page Heading</h1>
+  </ul>
 }
-
-<hr><hr>
-
-<h1>For Loop Contexual Variables</h1>
-@for(user of users; track user;
- let i = $index;
- let f = $first;
- let l = $last;
-){
-  @if(f || l){
-    <h3 style="background-color: rgb(161, 103, 63);">{{i+1}} name {{user}}</h3>
-  }
-  @else{
-    <h3>{{i+1}} name {{user}}</h3>
-  }
-  @if($odd){
-    <h3 style="background-color: #aaa;">user{{i}} and name {{user}}</h3>
-  }
-  @if($even){
-    <h3 style="background-color: rgb(167, 74, 190);">user {{i}} and name {{user}}</h3>
-  }
-  <!--
-@empty(){
-  <h1>No Record Found</h1>
-}-->
-}
-

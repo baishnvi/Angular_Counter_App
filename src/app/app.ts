@@ -3,64 +3,27 @@ import { RouterOutlet } from '@angular/router';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
 import { ProfileComponent } from '../profile/profile';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Login, Signup, ProfileComponent, RouterOutlet],
+  imports: [Login, Signup,FormsModule ,ProfileComponent, RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App {
+ task="";
+ taskList:{id:number,task:string}[]=[];
+ 
+ addTask(){
+  this.taskList.push({id:this.taskList.length+1,task:this.task})
+  this.task=''
+  console.log(this.taskList);
 
-  // ---------------- BASIC SIGNALS ----------------
-  count = signal(10);
+ }
 
-  updateValue() {
-    this.count.set(this.count() + 1);
-  }
-
-  // ---------------- COMPUTED SIGNALS ----------------
-  t = signal(10);
-  y = signal(20);
-
-  z = computed(() => this.t() + this.y());
-
-  showValue() {
-    console.log(this.z());
-    this.t.set(1200);
-    console.log(this.z());
-  }
-
-  updateT() {
-    this.t.set(200);
-  }
-
-  // ---------------- EFFECT DEMO ----------------
-  userName = signal('juhi');
-
-  displayHeading = signal(false);
-
-  constructor() {
-    effect(() => {
-      if (this.count() === 2) {
-        this.displayHeading.set(true);
-
-        setTimeout(() => {
-          this.displayHeading.set(false);
-        }, 2000);
-      } else {
-        this.displayHeading.set(false);
-      }
-
-      console.log('Count changed:', this.count());
-    });
-  }
-
-  toggleValue() {
-    this.count.set(this.count() + 1);
-  }
-
- users=['anu','rima','siya','ram','rohan']
- // users=[]
+ deleteTask(taskId: number){
+  this.taskList=this.taskList.filter((item)=>item.id!=taskId);
+ }
 }
