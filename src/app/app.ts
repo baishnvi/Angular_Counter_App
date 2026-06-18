@@ -13,17 +13,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app.css']
 })
 export class App {
- task="";
- taskList:{id:number,task:string}[]=[];
- 
- addTask(){
-  this.taskList.push({id:this.taskList.length+1,task:this.task})
-  this.task=''
-  console.log(this.taskList);
+bgColor = "pink"
+fontSize="30"
+headingSizeSmall="30px"
 
- }
+zoom=true
 
- deleteTask(taskId: number){
-  this.taskList=this.taskList.filter((item)=>item.id!=taskId);
- }
+updateHeadingSize(){
+  this.zoom=!this.zoom
+}
 }
