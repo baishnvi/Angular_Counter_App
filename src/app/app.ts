@@ -4,22 +4,40 @@ import { Login } from './login/login';
 import { Signup } from './signup/signup';
 import { ProfileComponent } from '../profile/profile';
 import { FormsModule } from '@angular/forms';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Login, Signup,FormsModule ,ProfileComponent, RouterOutlet],
+  imports: [Login, Signup,NgIf,NgFor,NgSwitch,NgSwitchCase,NgSwitchDefault,ProfileComponent, RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
 export class App {
-bgColor = "pink"
-fontSize="30"
-headingSizeSmall="30px"
+  show= true;
+  
+  block=0
+  updateBlock(){
+    this.block++;
+  }
 
-zoom=true
+  students= ["ruhi","goswami","singh","vinod"];
 
-updateHeadingSize(){
-  this.zoom=!this.zoom
-}
+  studentsData=[
+    {
+      name:'radhika',
+      age:33,
+      email:'radhika@example.com'
+    },
+    {
+      name:'sneha',
+      age:22,
+      email:'sneha@email.com'
+    }
+  ]
+
+  color="black";
+  changeColor(color:string){
+    this.color=color
+  }
 }

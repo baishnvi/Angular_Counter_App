@@ -1,7 +1,44 @@
-<h1
-style.backgroundColor="bgColor"
-[style.fontSize.pt]="fontSize">
-Dynamic Style</h1>
+<h1 *ngIf="show">Hello, world!</h1>
+<div *ngIf="block==0">
+    <h1>Heading 0 </h1>
+</div>
 
-<h1 [style.fontSize]="zoom? headingSizeBig:headingSizeSmall">Heading</h1>
-<button (click)="updateHeadingSize()">Toggle Font</button>
+<div *ngIf="block==1">
+    <h1>Heading 1</h1>
+
+</div>
+
+<div *ngIf="block==2">
+    <h1>Heading 2</h1>
+</div>
+
+<button (click)="updateBlock()">Update Block</button>
+
+
+
+
+<ul>
+    <li *ngFor="let x of students">
+        {{ x }}</li>
+</ul>
+
+<ul>
+    <li *ngFor="let student of studentsData">
+        {{student.name}},{{student.email}}
+    </li>
+</ul>
+
+<h1>*ngIf Directives in Angular</h1>
+
+<button (click)="changeColor('red')">Red</button>
+<button (click)="changeColor('green')">Green</button>
+<button (click)="changeColor('yellow')">Yellow</button>
+<button (click)="changeColor('blue')">Blue</button>
+
+<div [ngSwitch]="color">
+    <h1 *ngSwitchCase="'red'" style="background-color: red;">Red Color</h1>
+    <h1 *ngSwitchCase="'green'" style="background-color: green;">Green Color</h1>
+    <h1 *ngSwitchCase="'yellow'" style="background-color: yellow;">Yellow Color</h1>
+    <h1 *ngSwitchCase="'blue'" style="background-color: blue;">Blue Color</h1>
+    <h1 *ngSwitchDefault>No Color Match</h1>
+</div>
